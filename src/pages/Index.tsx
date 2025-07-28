@@ -81,7 +81,6 @@ const newsItems = [
 const Index = () => {
   const [showMarketInsights, setShowMarketInsights] = useState(false);
   const [showFinancialNews, setShowFinancialNews] = useState(false);
-  const [showPortfolioSimulator, setShowPortfolioSimulator] = useState(false);
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -118,8 +117,13 @@ const Index = () => {
           <ChatInterface />
         </div>
 
+        {/* Portfolio Visualizer - Always Visible */}
+        <div className="animate-fade-in mb-8" style={{ animationDelay: '400ms' }}>
+          <PortfolioSimulator />
+        </div>
+
         {/* Financial News Expandable Section */}
-        <div className="animate-fade-in mb-8" style={{ animationDelay: '600ms' }}>
+        <div className="animate-fade-in mb-8" style={{ animationDelay: '500ms' }}>
           <Button
             onClick={() => setShowFinancialNews(!showFinancialNews)}
             className="w-full glass-panel p-6 rounded-2xl bg-gradient-to-r from-rm/20 to-rm/10 hover:from-rm/30 hover:to-rm/20 border border-rm/40 hover:border-rm/60 transition-all duration-300"
@@ -175,27 +179,9 @@ const Index = () => {
           )}
         </div>
 
-        {/* Portfolio Simulator Expandable Section */}
-        <div className="animate-fade-in mb-8" style={{ animationDelay: '900ms' }}>
-          <Button
-            onClick={() => setShowPortfolioSimulator(!showPortfolioSimulator)}
-            className="w-full glass-panel p-6 rounded-2xl bg-gradient-to-r from-accent/20 to-accent/10 hover:from-accent/30 hover:to-accent/20 border border-accent/40 hover:border-accent/60 transition-all duration-300"
-          >
-            <div className="flex items-center justify-between w-full">
-              <span className="text-lg font-semibold">Portfolio Visualizer</span>
-              {showPortfolioSimulator ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-            </div>
-          </Button>
-
-          {showPortfolioSimulator && (
-            <div className="mt-6 animate-fade-in">
-              <PortfolioSimulator />
-            </div>
-          )}
-        </div>
 
         {/* Market Insights Expandable Section */}
-        <div className="animate-fade-in mb-8" style={{ animationDelay: '1200ms' }}>
+        <div className="animate-fade-in mb-8" style={{ animationDelay: '600ms' }}>
           <Button
             onClick={() => setShowMarketInsights(!showMarketInsights)}
             className="w-full glass-panel p-6 rounded-2xl bg-gradient-to-r from-primary/20 to-primary/10 hover:from-primary/30 hover:to-primary/20 border border-primary/40 hover:border-primary/60 transition-all duration-300"
