@@ -117,8 +117,13 @@ const Index = () => {
           <ChatInterface />
         </div>
 
-        {/* Financial News Expandable Section */}
+        {/* Portfolio Visualizer - Always Visible */}
         <div className="animate-fade-in mb-8" style={{ animationDelay: '400ms' }}>
+          <PortfolioSimulator />
+        </div>
+
+        {/* Financial News Expandable Section */}
+        <div className="animate-fade-in mb-8" style={{ animationDelay: '500ms' }}>
           <Button
             onClick={() => setShowFinancialNews(!showFinancialNews)}
             className="w-full glass-panel p-6 rounded-2xl bg-gradient-to-r from-rm/20 to-rm/10 hover:from-rm/30 hover:to-rm/20 border border-rm/40 hover:border-rm/60 transition-all duration-300"
@@ -172,11 +177,6 @@ const Index = () => {
               </div>
             </div>
           )}
-        </div>
-
-        {/* Portfolio Visualizer - Always Visible */}
-        <div className="animate-fade-in mb-8" style={{ animationDelay: '500ms' }}>
-          <PortfolioSimulator />
         </div>
 
 
