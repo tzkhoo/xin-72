@@ -20,10 +20,9 @@ interface PortfolioSphereProps {
 const AssetSphere: React.FC<{ asset: AssetAllocation; totalValue: number }> = ({ asset, totalValue }) => {
   const meshRef = useRef<Mesh>(null);
   const innerMeshRef = useRef<Mesh>(null);
-  const glowMeshRef = useRef<Mesh>(null);
   const radius = Math.sqrt(asset.percentage / 100) * 2;
 
-  // Create asset-specific materials and effects
+  // Enhanced asset-specific materials with brighter, HD textures
   const getAssetMaterial = (assetName: string, color: string) => {
     const baseColor = new Color(color);
     
@@ -31,96 +30,89 @@ const AssetSphere: React.FC<{ asset: AssetAllocation; totalValue: number }> = ({
       case 'stocks':
       case 'global stocks':
         return {
-          color: baseColor,
-          metalness: 0.7,
-          roughness: 0.2,
-          emissive: baseColor.clone().multiplyScalar(0.1),
+          color: baseColor.clone().multiplyScalar(1.5), // Brighter
+          metalness: 0.8,
+          roughness: 0.1,
+          emissive: baseColor.clone().multiplyScalar(0.25),
+          envMapIntensity: 1.5,
         };
       case 'bonds':
       case 'green bonds':
         return {
-          color: baseColor,
-          metalness: 0.3,
-          roughness: 0.4,
-          emissive: baseColor.clone().multiplyScalar(0.05),
+          color: baseColor.clone().multiplyScalar(1.4),
+          metalness: 0.6,
+          roughness: 0.2,
+          emissive: baseColor.clone().multiplyScalar(0.2),
+          envMapIntensity: 1.3,
         };
       case 'reits':
       case 'esg reits':
         return {
-          color: baseColor,
-          metalness: 0.8,
-          roughness: 0.1,
-          emissive: baseColor.clone().multiplyScalar(0.15),
+          color: baseColor.clone().multiplyScalar(1.6),
+          metalness: 0.9,
+          roughness: 0.05,
+          emissive: baseColor.clone().multiplyScalar(0.3),
+          envMapIntensity: 1.8,
         };
       case 'clean energy':
       case 'commodities':
         return {
-          color: baseColor,
-          metalness: 0.9,
-          roughness: 0.05,
-          emissive: baseColor.clone().multiplyScalar(0.2),
+          color: baseColor.clone().multiplyScalar(1.7),
+          metalness: 0.95,
+          roughness: 0.02,
+          emissive: baseColor.clone().multiplyScalar(0.35),
+          envMapIntensity: 2.0,
         };
       case 'cash':
       case 'cash & equivalents':
         return {
-          color: baseColor,
-          metalness: 0.1,
-          roughness: 0.6,
-          emissive: baseColor.clone().multiplyScalar(0.02),
+          color: baseColor.clone().multiplyScalar(1.3),
+          metalness: 0.4,
+          roughness: 0.3,
+          emissive: baseColor.clone().multiplyScalar(0.15),
+          envMapIntensity: 1.2,
         };
       default:
         return {
-          color: baseColor,
-          metalness: 0.5,
-          roughness: 0.3,
-          emissive: baseColor.clone().multiplyScalar(0.1),
+          color: baseColor.clone().multiplyScalar(1.4),
+          metalness: 0.7,
+          roughness: 0.15,
+          emissive: baseColor.clone().multiplyScalar(0.2),
+          envMapIntensity: 1.4,
         };
     }
   };
 
   const materialProps = getAssetMaterial(asset.name, asset.color);
 
+  // Slow rotation animation
   useFrame((state) => {
     const time = state.clock.elapsedTime;
     
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.008;
-      meshRef.current.rotation.x += 0.003;
-      meshRef.current.position.y = Math.sin(time * 0.5 + asset.position.x) * 0.15;
+      // Slow continuous rotation
+      meshRef.current.rotation.y += 0.005;
+      meshRef.current.rotation.x += 0.002;
+      // Gentle floating motion
+      meshRef.current.position.y = Math.sin(time * 0.3 + asset.position.x) * 0.1;
     }
     
     if (innerMeshRef.current) {
-      innerMeshRef.current.rotation.y -= 0.012;
-      innerMeshRef.current.rotation.z += 0.005;
-    }
-    
-    if (glowMeshRef.current) {
-      const scale = 1 + Math.sin(time * 2) * 0.1;
-      glowMeshRef.current.scale.setScalar(scale);
-      glowMeshRef.current.rotation.y += 0.02;
+      // Counter-rotation for inner core
+      innerMeshRef.current.rotation.y -= 0.008;
+      innerMeshRef.current.rotation.z += 0.003;
     }
   });
 
   return (
     <group position={asset.position}>
-      {/* Outer glow */}
-      <mesh ref={glowMeshRef}>
-        <sphereGeometry args={[radius * 1.2, 16, 16]} />
-        <meshBasicMaterial 
-          color={asset.color} 
-          transparent 
-          opacity={0.1}
-          side={2} // DoubleSide
-        />
-      </mesh>
-      
-      {/* Main sphere */}
+      {/* Main sphere with HD texture and bright colors */}
       <mesh ref={meshRef}>
-        <sphereGeometry args={[radius, 64, 64]} />
+        <sphereGeometry args={[radius, 128, 128]} />
         <meshStandardMaterial 
           {...materialProps}
-          transparent 
-          opacity={0.9}
+          transparent={false}
+          opacity={1.0}
         />
       </mesh>
       
