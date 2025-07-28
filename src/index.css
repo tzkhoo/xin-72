@@ -1,0 +1,546 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AI Nebula Design System - All colors in HSL format */
+
+@layer base {
+  :root {
+    /* Nebula Background Colors */
+    --background: 220 15% 13%; /* Dark charcoal #231F20 */
+    --background-secondary: 0 0% 20%; /* Slightly lighter #333333 */
+    --foreground: 0 0% 98%; /* Pure white text */
+
+    /* Glass/Card Colors */
+    --card: 220 15% 13% / 0.4; /* Semi-transparent dark */
+    --card-foreground: 0 0% 98%;
+    --glass: 0 0% 100% / 0.08; /* Glass overlay */
+    --glass-border: 0 0% 100% / 0.2; /* Glass border */
+
+    /* Popover Colors */
+    --popover: 220 15% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary Nebula Red */
+    --primary: 343 75% 43%; /* #A71930 */
+    --primary-glow: 343 85% 55%; /* Brighter red for glow */
+    --primary-foreground: 0 0% 98%;
+
+    /* Secondary Glass Teal */
+    --secondary: 180 50% 30%; /* Teal for buttons */
+    --secondary-foreground: 0 0% 98%;
+
+    /* Muted Colors */
+    --muted: 0 0% 100% / 0.1;
+    --muted-foreground: 0 0% 70%;
+
+    /* Accent Purple */
+    --accent: 315 60% 60%; /* Pinkish purple */
+    --accent-foreground: 0 0% 98%;
+
+    /* Advanced Mode Golden */
+    --advanced: 45 100% 50%; /* Golden */
+    --advanced-light: 45 90% 60%; /* Light golden */
+    --advanced-dark: 45 100% 40%; /* Dark golden */
+    --advanced-foreground: 0 0% 98%;
+    --golden: 45 100% 50%; /* Pure golden */
+    
+    /* Parent Mode Yellow */
+    --parent: 45 95% 55%; /* Yellow for parents */
+    --parent-light: 45 85% 65%; /* Light yellow */
+    --parent-dark: 45 100% 45%; /* Dark yellow */
+    --parent-foreground: 0 0% 98%;
+    
+    /* RM Mode Blue - Brighter Blue */
+    --rm: 210 95% 72%; /* Brighter blue for RM */
+    --rm-light: 210 85% 82%; /* Light bright blue */
+    --rm-dark: 210 100% 62%; /* Dark bright blue */
+    --rm-foreground: 0 0% 98%;
+    
+    /* Task Scheduler Mode - Different Blue */
+    --scheduler: 195 100% 65%; /* Cyan blue for scheduler */
+    --scheduler-light: 195 90% 75%; /* Light cyan blue */
+    --scheduler-dark: 195 100% 55%; /* Dark cyan blue */
+    --scheduler-foreground: 0 0% 98%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders and Inputs */
+    --border: 0 0% 100% / 0.15;
+    --input: 0 0% 100% / 0.1;
+    --ring: 343 75% 43%;
+
+    --radius: 1rem;
+
+    /* Sidebar colors - keeping for compatibility but using nebula theme */
+    --sidebar-background: 220 15% 13%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 343 75% 43%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 315 60% 60%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 100% / 0.15;
+    --sidebar-ring: 343 75% 43%;
+
+    /* Gradients */
+    --gradient-nebula: linear-gradient(135deg, hsl(220 15% 13%), hsl(240 20% 15%));
+    --gradient-nebula-glow: radial-gradient(circle at 50% 50%, hsl(270 50% 30% / 0.2) 0%, transparent 70%);
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.1), hsl(0 0% 100% / 0.05));
+    --gradient-red-glow: radial-gradient(circle, hsl(343 85% 55% / 0.4) 0%, transparent 70%);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(343 75% 43% / 0.3);
+    --shadow-glass: 0 8px 32px hsl(0 0% 0% / 0.3);
+    --shadow-floating: 0 20px 40px hsl(0 0% 0% / 0.4);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: all 0.5s ease-in-out;
+  }
+  
+  .dark {
+    /* Dark mode uses the same values as our nebula theme */
+    --background: 220 15% 13%;
+    --foreground: 0 0% 98%;
+    --card: 220 15% 13% / 0.4;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 343 75% 43%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 180 50% 30%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 100% / 0.1;
+    --muted-foreground: 0 0% 70%;
+    --accent: 315 60% 60%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 100% / 0.15;
+    --input: 0 0% 100% / 0.1;
+    --ring: 343 75% 43%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    background: var(--gradient-nebula) !important;
+    background-color: hsl(220 15% 13%) !important;
+    position: relative;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-nebula-glow);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply backdrop-blur-xl bg-glass border border-glass-border rounded-2xl;
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .glass-button {
+    @apply backdrop-blur-md bg-glass border border-glass-border rounded-xl;
+    transition: var(--transition-smooth);
+  }
+  
+  .glass-button:hover {
+    @apply bg-primary/20 border-primary/40;
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .glow-red {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .floating-stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+  }
+  
+  .red-star {
+    background: hsl(343 75% 43%);
+    box-shadow: 0 0 6px hsl(343 75% 43%);
+  }
+  
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: var(--shadow-glow); }
+    50% { box-shadow: 0 0 60px hsl(343 75% 43% / 0.5); }
+  }
+  
+  @keyframes premium-burn {
+    0%, 100% { 
+      box-shadow: 0 0 15px hsl(160 60% 45% / 0.2), 0 0 30px hsl(160 60% 45% / 0.1);
+      border-color: hsl(160 60% 45% / 0.3);
+    }
+    50% { 
+      box-shadow: 0 0 20px hsl(160 60% 45% / 0.3), 0 0 40px hsl(160 60% 45% / 0.2);
+      border-color: hsl(160 60% 45% / 0.4);
+    }
+  }
+  
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  /* Enhanced float text animations */
+  @keyframes float-text {
+    0%, 100% { 
+      transform: translateY(0px) scale(1) rotate(0deg);
+      text-shadow: 0 0 20px hsla(var(--primary) / 0.3);
+    }
+    25% { 
+      transform: translateY(-12px) scale(1.02) rotate(0.5deg);
+      text-shadow: 0 0 25px hsla(var(--primary) / 0.4);
+    }
+    50% { 
+      transform: translateY(-20px) scale(1.05) rotate(0deg);
+      text-shadow: 0 0 30px hsla(var(--primary) / 0.5);
+    }
+    75% { 
+      transform: translateY(-12px) scale(1.02) rotate(-0.5deg);
+      text-shadow: 0 0 25px hsla(var(--primary) / 0.4);
+    }
+  }
+
+  @keyframes float-text-xin {
+    0%, 100% { 
+      transform: translateY(0px) scale(1) rotate(0deg);
+      text-shadow: 0 0 20px hsla(var(--primary) / 0.3);
+    }
+    33% { 
+      transform: translateY(-15px) scale(1.03) rotate(1deg);
+      text-shadow: 0 0 30px hsla(var(--primary) / 0.5);
+    }
+    66% { 
+      transform: translateY(-8px) scale(1.01) rotate(-0.5deg);
+      text-shadow: 0 0 25px hsla(var(--primary) / 0.4);
+    }
+  }
+
+  @keyframes float-text-ai {
+    0%, 100% { 
+      transform: translateY(0px) scale(1) rotate(0deg);
+      text-shadow: 0 0 20px hsla(var(--secondary) / 0.3);
+    }
+    40% { 
+      transform: translateY(-18px) scale(1.04) rotate(-1deg);
+      text-shadow: 0 0 35px hsla(var(--secondary) / 0.6);
+    }
+    80% { 
+      transform: translateY(-5px) scale(1.02) rotate(0.5deg);
+      text-shadow: 0 0 28px hsla(var(--secondary) / 0.5);
+    }
+  }
+  
+  @keyframes particle-fall {
+    0% { 
+      transform: translateY(-10px) translateX(0px) scale(1);
+      opacity: 1;
+    }
+    100% { 
+      transform: translateY(30px) translateX(10px) scale(0.3);
+      opacity: 0;
+    }
+  }
+  
+  .advanced-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 0;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: hsl(45 100% 50%);
+    border-radius: 50%;
+    animation: particle-fall 2s linear infinite;
+    box-shadow: 0 0 8px hsl(45 100% 50%), 0 0 16px hsl(45 100% 50% / 0.5);
+  }
+
+  .particle-golden-small {
+    background: hsl(45 100% 50%) !important;
+    box-shadow: 0 0 6px hsl(45 100% 50%), 0 0 12px hsl(45 100% 50% / 0.4) !important;
+    width: 3px !important;
+    height: 3px !important;
+  }
+  
+  .particle-left {
+    animation: particle-fall-left 2s linear infinite;
+  }
+  
+  .particle-right {
+    animation: particle-fall-right 2s linear infinite;
+  }
+  
+  .particle-bottom {
+    animation: particle-fall-bottom 1.5s linear infinite;
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 6px hsl(160 60% 45%);
+  }
+  
+  @keyframes particle-fall-left {
+    0% { 
+      transform: translateY(-5px) translateX(5px) scale(1);
+      opacity: 1;
+    }
+    100% { 
+      transform: translateY(35px) translateX(-20px) scale(0.3);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes particle-fall-right {
+    0% { 
+      transform: translateY(-5px) translateX(-5px) scale(1);
+      opacity: 1;
+    }
+    100% { 
+      transform: translateY(35px) translateX(20px) scale(0.3);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes particle-fall-bottom {
+    0% { 
+      transform: translateY(-5px) translateX(0px) scale(1);
+      opacity: 1;
+    }
+    100% { 
+      transform: translateY(45px) translateX(8px) scale(0.2);
+      opacity: 0;
+    }
+  }
+
+  /* Advanced mode golden premium aesthetic */
+  .premium-glow {
+    box-shadow: 
+      0 0 30px hsla(45, 100%, 50%, 0.3),
+      0 0 60px hsla(45, 100%, 50%, 0.2),
+      inset 0 1px 0 hsla(45, 100%, 80%, 0.5);
+    border: 2px solid hsla(45, 100%, 60%, 0.8);
+    background: linear-gradient(135deg, 
+      hsla(45, 100%, 50%, 0.1) 0%,
+      hsla(45, 100%, 60%, 0.05) 50%,
+      hsla(45, 100%, 40%, 0.1) 100%);
+  }
+
+  .premium-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .premium-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsla(45, 100%, 80%, 0.3),
+      hsla(45, 100%, 80%, 0.2),
+      transparent
+    );
+    animation: shine-sweep 8s infinite;
+    z-index: 1;
+    border-radius: inherit;
+  }
+
+  @keyframes shine-sweep {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+  }
+
+  /* Gentle bounce animation for navigation icons */
+  @keyframes gentle-bounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+  }
+
+  /* Floating Animation for Xin AI text - no glow */
+  @keyframes float-gentle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-2px) rotate(0.5deg); }
+    66% { transform: translateY(2px) rotate(-0.5deg); }
+  }
+
+  .animate-float-gentle {
+    animation: float-gentle 4s ease-in-out infinite;
+  }
+
+  /* Enhanced particle effects */
+  .particle-golden {
+    background: hsl(45 100% 50%) !important;
+    box-shadow: 0 0 12px hsl(45 100% 50%), 0 0 24px hsl(45 100% 50% / 0.7) !important;
+    width: 5px !important;
+    height: 5px !important;
+  }
+
+  .particle-left {
+    animation: particle-fall-left-enhanced 3s linear infinite;
+  }
+  
+  .particle-right {
+    animation: particle-fall-right-enhanced 3s linear infinite;
+  }
+  
+  .particle-bottom {
+    animation: particle-fall-bottom-enhanced 2s linear infinite;
+  }
+
+  @keyframes particle-fall-left-enhanced {
+    0% { 
+      transform: translateY(0px) translateX(0px) scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: translateY(60px) translateX(-80px) scale(1);
+      opacity: 0.8;
+    }
+    100% { 
+      transform: translateY(150px) translateX(-200px) scale(0);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes particle-fall-right-enhanced {
+    0% { 
+      transform: translateY(0px) translateX(0px) scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: translateY(60px) translateX(80px) scale(1);
+      opacity: 0.8;
+    }
+    100% { 
+      transform: translateY(150px) translateX(200px) scale(0);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes particle-fall-bottom-enhanced {
+    0% { 
+      transform: translateY(0px) translateX(0px) scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: translateY(80px) translateX(30px) scale(1);
+      opacity: 0.8;
+    }
+    100% { 
+      transform: translateY(180px) translateX(60px) scale(0);
+      opacity: 0;
+    }
+  }
+
+  /* Subtle drift animations */
+  @keyframes subtle-drift-1 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(20px, 15px); }
+  }
+  
+  @keyframes subtle-drift-2 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-15px, 25px); }
+  }
+  
+  @keyframes subtle-drift-3 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(25px, -10px); }
+  }
+  
+  @keyframes subtle-drift-4 {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-20px, -18px); }
+  }
+  
+  .drift-star {
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+  }
+  
+  .drift-star-1 { --drift-duration: 80s; animation-name: subtle-drift-1; }
+  .drift-star-2 { --drift-duration: 100s; animation-name: subtle-drift-2; }
+  .drift-star-3 { --drift-duration: 75s; animation-name: subtle-drift-3; }
+  .drift-star-4 { --drift-duration: 90s; animation-name: subtle-drift-4; }
+
+
+  /* Input box particles for advanced mode */
+  .input-particles {
+    z-index: 5;
+  }
+
+  .input-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: hsl(45 100% 50%);
+    border-radius: 50%;
+    animation: input-particle-radiate 2s linear infinite;
+    box-shadow: 0 0 4px hsl(45 100% 50%);
+  }
+
+  @keyframes input-particle-radiate {
+    0% { 
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    100% { 
+      transform: translate(calc(var(--particle-dx, 1) * 80px), calc(var(--particle-dy, 1) * 80px)) scale(0);
+      opacity: 0;
+    }
+  }
+  
+}
